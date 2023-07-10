@@ -142,11 +142,6 @@ const PinMap *i2c_slave_scl_pinmap()
     return PinMap_I2C_SCL;
 }
 
-int i2c_stop(i2c_t *obj)
-{
-
-}
-
 #if DEVICE_I2CSLAVE
 
 /** Configure I2C as slave or master.
@@ -213,7 +208,7 @@ int i2c_slave_write(i2c_t *obj, const char *data, int length)
     i2c_write_raw_blocking(obj->dev, (const uint8_t *)data, (size_t)length);
 
     //Clear interrupt
-    int clear_read_req = i2c_get_hw(obj->dev)->clr_rd_req;
+    [[maybe_unused]] int clear_read_req = i2c_get_hw(obj->dev)->clr_rd_req;
     DEBUG_PRINTF("clear_read_req: %d\n", clear_read_req);
 
     return length;
